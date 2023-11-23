@@ -28,7 +28,7 @@ ul {
 
 a {
   appearance: none;
-  background-color: transparent;
+  background-color: #fff;
   border: 0.125em solid #1a1a1a;
   border-radius: 0.6375em;
   box-sizing: border-box;

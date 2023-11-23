@@ -5,7 +5,7 @@ const form = document.querySelector('.form');
 
 form.addEventListener('submit', onSubmitForm);
 
-async function onSubmitForm(event) {
+function onSubmitForm(event) {
   event.preventDefault();
   const { delay, step, amount } = event.currentTarget.elements;
 
@@ -21,22 +21,23 @@ async function onSubmitForm(event) {
       const position = i + 1;
       const delays = Number(delay.value) + step.value * i;
 
-      try {
-        await createPromise(position, delays);
-        iziToast.show({
-          title: 'Success',
-          message: `✅ Fulfilled promise ${position} in ${delays}ms`,
-          position: 'topRight',
-          color: 'green',
+      createPromise(position, delays)
+        .then(() => {
+          iziToast.show({
+            title: 'Success',
+            message: `✅ Fulfilled promise ${position} in ${delays}ms`,
+            position: 'topRight',
+            color: 'green',
+          });
+        })
+        .catch(() => {
+          iziToast.show({
+            title: 'Error',
+            message: `❌ Rejected promise ${position} in ${delays}ms`,
+            position: 'topRight',
+            color: 'red',
+          });
         });
-      } catch (error) {
-        iziToast.show({
-          title: 'Error',
-          message: `❌ Rejected promise ${position} in ${delays}ms`,
-          position: 'topRight',
-          color: 'red',
-        });
-      }
     }
   }
 

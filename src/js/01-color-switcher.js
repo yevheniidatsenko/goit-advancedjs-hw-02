@@ -8,6 +8,8 @@ let startBtn = document.getElementById('startBtn');
 let stopBtn = document.getElementById('stopBtn');
 let isActive = false;
 
+stopBtn.disabled = true;
+
 startBtn.addEventListener('click', () => {
   if (!isActive) {
     isActive = true;
